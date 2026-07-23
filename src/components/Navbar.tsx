@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import ThemeToggle from './ThemeToggle'
+import LanguageToggle from './LanguageToggle'
 
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false)
@@ -8,7 +9,7 @@ const Navbar = () => {
     <nav className="fixed top-0 left-0 right-0 z-50 bg-base-100/80 backdrop-blur-md border-b border-base-300">
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between h-16">
         <a href="#" className="text-xl font-bold text-primary">
-          AH
+          <span className=""> Aranza</span>  Herrera
         </a>
 
         <ul className="hidden md:flex items-center gap-6 text-sm font-medium">
@@ -18,6 +19,7 @@ const Navbar = () => {
         </ul>
 
         <div className="flex items-center gap-2">
+          <LanguageToggle />
           <ThemeToggle />
           <button
             className="btn btn-ghost btn-circle md:hidden"

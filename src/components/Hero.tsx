@@ -1,9 +1,43 @@
+import { useEffect, useState } from 'react'
 import myPhoto from '../assets/My_foto2.png'
+import GradientText from './GradientText'
+import SideRays from './SideRays'
+import HeroLightEffect from './HeroLightEffect'
 
 const Hero = () => {
+  const [isDim, setIsDim] = useState(() => {
+    return document.documentElement.getAttribute('data-theme') === 'dim'
+  })
+
+  useEffect(() => {
+    const observer = new MutationObserver(() => {
+      setIsDim(document.documentElement.getAttribute('data-theme') === 'dim')
+    })
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] })
+    return () => observer.disconnect()
+  }, [])
   return (
-    <section className="h-[calc(100vh-4rem)] flex items-center relative overflow-hidden bg-gradient-to-br from-base-200 via-base-100 to-base-200">
-      <div className="max-w-7xl mx-auto px-6 w-full">
+    <section className={`h-[calc(100vh-4rem)] flex items-center relative overflow-hidden ${isDim ? 'bg-gradient-to-br from-base-200 via-base-100 to-base-200' : 'bg-white'}`}>
+      <div className="absolute inset-0 pointer-events-none">
+        {isDim ? (
+          <SideRays
+            speed={2.5}
+            rayColor1="#96ffc6"
+            rayColor2="#44aef2"
+            intensity={2.1}
+            spread={2}
+            origin="top-right"
+            tilt={1}
+            saturation={2}
+            blend={0.64}
+            falloff={1.5}
+            opacity={0.8}
+          />
+        ) : (
+          <HeroLightEffect />
+        )}
+      </div>
+      <div className="max-w-7xl mx-auto px-6 w-full relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div className="space-y-8">
             <div className="badge badge-primary badge-outline gap-1">
@@ -13,10 +47,17 @@ const Hero = () => {
               Desarrolladora Full-Stack
             </div>
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight">
-              Construyo{' '}
-              <span className="text-primary">aplicaciones web</span>{' '}
-              que escalan
+              Hola! Yo soy{' '}
+              <GradientText
+                colors={isDim ? ['#53bde3', '#14df68'] : ['#5227FF', '#FF9FFC', '#B497CF']}
+                animationSpeed={3}
+                showBorder={false}
+              >
+                ARANZA HERRERA
+              </GradientText>{' '}
             </h1>
+            <h6 className="text-2xl mt-0 font-extrabold leading-tight">  Desarrolladora Full-Stack</h6>
+
             <p className="text-lg text-base-content/70 leading-relaxed max-w-lg">
               Experiencia en aplicaciones web empresariales de extremo a extremo.
               Backend con .NET (C#) y frontend con Angular y TypeScript,
@@ -25,7 +66,7 @@ const Hero = () => {
             </p>
             <div className="flex flex-wrap gap-4">
               <a
-                href="/Detailed%20CV%20Aranza%20Herrera.pdf"
+                href="/Aranza_Herrera_Arellano-CV.pdf"
                 className="btn btn-primary"
               >
                 Descargar CV
