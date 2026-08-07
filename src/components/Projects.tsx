@@ -1,31 +1,31 @@
-import webDev from '../assets/project-backgrounds/web_development.png'
-import dashboards from '../assets/project-backgrounds/dashboards.jpg'
-import cvMaker from '../assets/project-backgrounds/cv_maker.png'
+import processEcology from '../assets/project-backgrounds/processEcology.png'
+import ngIf from '../assets/project-backgrounds/ngIf.png'
+import luminaCV from '../assets/project-backgrounds/luminaCV.png'
 
 const projects = [
   {
     num: '01',
-    title: 'Aplicaciones Web Empresariales',
-    description: 'Soluciones full-stack con visualización de datos y diagramas interactivos para empresas.',
+    title: 'Methane Innovation',
+    description: 'Plataforma web para un consorcio de innovación en tecnologías limpias, con visualización de datos y diagramas interactivos para monitoreo de reducción de emisiones de metano.',
     tech: ['Angular', '.NET (C#)'],
-    image: webDev,
-    link: '#',
+    image: ngIf,
+    link: 'https://www.methaneinnovation.ca/',
   },
   {
     num: '02',
-    title: 'Dashboards Interactivos',
-    description: 'Paneles de control para monitoreo y análisis de datos en tiempo real.',
+    title: 'Process Ecology',
+    description: 'Pagina representativa de Process Ecology Inc. Empresa canadiense en el rubro de desarrollo de software de simulacion de procesos contaminantes',
     tech: ['React', 'Java'],
-    image: dashboards,
-    link: '#',
+    image: processEcology,
+    link: 'https://processecology.com/',
   },
   {
     num: '03',
     title: 'Generador de CV',
     description: 'Herramienta web para crear y descargar currículums profesionales de forma sencilla.',
-    tech: ['React', '.NET (C#)'],
-    image: cvMaker,
-    link: '#',
+    tech: ['Next.js', '.NET (C#)'],
+    image: luminaCV,
+    link: 'https://luminacv-maker.vercel.app/',
   },
 ]
 
