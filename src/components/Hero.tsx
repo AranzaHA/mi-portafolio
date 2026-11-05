@@ -1,85 +1,99 @@
-import { useEffect, useState } from 'react'
-import myPhoto from '../assets/My_foto2.png'
-import GradientText from './GradientText'
-import SideRays from './SideRays'
-import HeroLightEffect from './HeroLightEffect'
+import AeroShards from './AeroShards'
+import { useBreakpoint, type Breakpoint } from '../hooks/useBreakpoint'
+import Reveal from './Reveal'
+
+interface AeroShardsRange {
+  count: number
+  shardSize: number
+  spread: number
+  dpr: number
+  placement: 'full' | 'left' | 'right' | 'center'
+}
+
+const BASE_DENSITY = 1300
+
+const AERO_SHARDS_BY_BREAKPOINT: Record<Breakpoint, AeroShardsRange> = {
+  desktop: { count: BASE_DENSITY, shardSize: 1, spread: 1, dpr: 2, placement: 'full' },
+  tablet: { count: Math.round(BASE_DENSITY * 0.7), shardSize: 1, spread: 1.15, dpr: 2, placement: 'full' },
+  mobile: { count: Math.round(BASE_DENSITY * 0.45), shardSize: 0.8, spread: 1.5, dpr: 1.5, placement: 'full' },
+  mobileSm: { count: Math.round(BASE_DENSITY * 0.3), shardSize: 0.7, spread: 1.8, dpr: 1, placement: 'full' },
+}
 
 const Hero = () => {
-  const [isDim, setIsDim] = useState(() => {
-    return document.documentElement.getAttribute('data-theme') === 'dim'
-  })
+  const breakpoint = useBreakpoint()
+  const shards = AERO_SHARDS_BY_BREAKPOINT[breakpoint]
 
-  useEffect(() => {
-    const observer = new MutationObserver(() => {
-      setIsDim(document.documentElement.getAttribute('data-theme') === 'dim')
-    })
-    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] })
-    return () => observer.disconnect()
-  }, [])
   return (
-    <section className={`h-[calc(100vh-4rem)] flex items-center relative overflow-hidden ${isDim ? 'bg-gradient-to-br from-base-200 via-base-100 to-base-200' : 'bg-white'}`}>
-      <div className="absolute inset-0 pointer-events-none">
-        {isDim ? (
-          <SideRays
-            speed={2.5}
-            rayColor1="#96ffc6"
-            rayColor2="#44aef2"
-            intensity={2.1}
-            spread={2}
-            origin="top-right"
-            tilt={1}
-            saturation={2}
-            blend={0.64}
-            falloff={1.5}
-            opacity={0.8}
-          />
-        ) : (
-          <HeroLightEffect />
-        )}
+    <section className="h-[calc(100vh-4rem)] flex items-center relative overflow-hidden bg-base-100">
+      <div className="absolute inset-0">
+        <AeroShards
+          key={breakpoint}
+          shardColor="#22d3ee"
+          accentColor="#3b82f6"
+          backgroundColor="transparent"
+          markers="none"
+          count={shards.count}
+          shardSize={shards.shardSize}
+          spread={shards.spread}
+          dpr={shards.dpr}
+          placement={shards.placement}
+        />
       </div>
+      <div className="absolute inset-0 bg-base-100/40 lg:bg-transparent pointer-events-none" />
       <div className="max-w-7xl mx-auto px-6 w-full relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <div className="space-y-8">
-            <div className="badge badge-primary badge-outline gap-1">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-              </svg>
-              Desarrolladora Full-Stack
-            </div>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight">
-              Hola! Yo soy{' '}
-              <GradientText
-                colors={isDim ? ['#53bde3', '#14df68'] : ['#5227FF', '#FF9FFC', '#B497CF']}
-                animationSpeed={3}
-                showBorder={false}
-              >
-                ARANZA HERRERA
-              </GradientText>{' '}
-            </h1>
-            <h6 className="text-2xl mt-0 font-extrabold leading-tight">  Desarrolladora Full-Stack</h6>
-
-            <p className="text-lg text-base-content/70 leading-relaxed max-w-lg">
-              Experiencia en aplicaciones web empresariales de extremo a extremo.
-              Backend con .NET (C#) y frontend con Angular y TypeScript,
-              integrando librerías complejas de visualización de datos y
-              diagramas interactivos.
+        <div className="flex flex-col items-center text-center pointer-events-none">
+          <Reveal as="span" onLoad delay={0}>
+            <span
+              className="font-script text-primary leading-none"
+              style={{ fontSize: 'clamp(3rem, 1.944rem + 4.507vw, 6rem)' }}
+            >
+              Hola!
+            </span>
+          </Reveal>
+          <Reveal onLoad delay={150}>
+            <p
+              className="font-medium text-base-content/70 leading-tight"
+              style={{ fontSize: 'clamp(1.125rem, 0.905rem + 0.939vw, 1.75rem)', marginTop: '0.35em' }}
+            >
+              Yo soy
             </p>
-            <div className="flex flex-wrap gap-4">
-              <a
-                href="/Aranza_Herrera_Arellano-CV.pdf"
-                className="btn btn-primary"
-              >
-                Descargar CV
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                  <path fillRule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clipRule="evenodd" />
-                </svg>
-              </a>
+          </Reveal>
+          <Reveal onLoad delay={300}>
+            <h1
+              className="font-extrabold uppercase text-base-content leading-[1.05] break-words max-w-full"
+              style={{ fontSize: 'clamp(2rem, 0.768rem + 5.258vw, 5.5rem)', letterSpacing: '0.04em', marginTop: '0.1em' }}
+            >
+              Aranza Herrera
+            </h1>
+          </Reveal>
+          <Reveal onLoad delay={450}>
+            <p
+              className="font-medium leading-tight"
+              style={{ fontSize: 'clamp(1rem, 0.736rem + 1.127vw, 1.75rem)', marginTop: '2.5rem' }}
+            >
+              Desarrolladora <span className="text-primary">Full-Stack</span>
+            </p>
+          </Reveal>
+
+          <Reveal onLoad delay={600}>
+            <div className="flex flex-wrap justify-center gap-4 pointer-events-auto" style={{ marginTop: '3rem' }}>
+            <a
+              href="/Aranza_Herrera_Arellano_CV.pdf"
+              className="btn btn-primary"
+            >
+              Descargar CV
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                <path fillRule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clipRule="evenodd" />
+              </svg>
+            </a>
               <a href="#contact" className="btn btn-outline btn-primary">
                 Contáctame
               </a>
             </div>
-          </div>
-          <div className="relative flex justify-center lg:justify-end">
+          </Reveal>
+        </div>
+      </div>
+{/*          <div className="relative flex justify-center lg:justify-end">
             <div className="relative">
               <div className="w-72 h-72 sm:w-80 sm:h-80 lg:w-96 lg:h-96 rounded-3xl overflow-hidden shadow-2xl border-4 border-primary/20">
                 <img
@@ -101,9 +115,7 @@ const Hero = () => {
                 <div className="text-lg font-bold">Full-Stack</div>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
+          </div>*/}
       <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-base-100 to-transparent" />
     </section>
   )

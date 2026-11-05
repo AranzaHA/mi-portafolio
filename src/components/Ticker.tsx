@@ -3,7 +3,8 @@ import { useEffect, useRef } from 'react'
 const testimonials = [
   { text: 'Excelente visión', author: 'Ahad Sharaf' },
   { text: 'Muy Creativa', author: 'Salvador Campos' },
-  { text: 'Se adapta muy bien al trabajo en equipo', author: 'Alberto Alba' },
+  { text: 'Se adapta muy bien al trabajo en equipo', author: 'Alberto Alva Argaez' },
+  { text: 'Excelente sentido del diseño', author: 'Jesus Chirinos Taboada' },
 ]
 
 const Ticker = () => {

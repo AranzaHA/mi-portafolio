@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import ThemeToggle from './ThemeToggle'
 import LanguageToggle from './LanguageToggle'
 
 const Navbar = () => {
@@ -15,12 +14,13 @@ const Navbar = () => {
         <ul className="hidden md:flex items-center gap-6 text-sm font-medium">
           <li><a href="#about" className="hover:text-primary transition-colors">Sobre mí</a></li>
           <li><a href="#skills" className="hover:text-primary transition-colors">Habilidades</a></li>
+          <li><a href="#experience" className="hover:text-primary transition-colors">Experiencia</a></li>
+          <li><a href="#projects" className="hover:text-primary transition-colors">Proyectos</a></li>
           <li><a href="#contact" className="hover:text-primary transition-colors">Contacto</a></li>
         </ul>
 
         <div className="flex items-center gap-2">
           <LanguageToggle />
-          <ThemeToggle />
           <button
             className="btn btn-ghost btn-circle md:hidden"
             onClick={() => setMobileOpen(!mobileOpen)}
@@ -42,6 +42,8 @@ const Navbar = () => {
           <ul className="flex flex-col gap-3 pt-3 text-sm font-medium">
             <li><a href="#about" onClick={() => setMobileOpen(false)}>Sobre mí</a></li>
             <li><a href="#skills" onClick={() => setMobileOpen(false)}>Habilidades</a></li>
+            <li><a href="#experience" onClick={() => setMobileOpen(false)}>Experiencia</a></li>
+            <li><a href="#projects" onClick={() => setMobileOpen(false)}>Proyectos</a></li>
             <li><a href="#contact" onClick={() => setMobileOpen(false)}>Contacto</a></li>
           </ul>
         </div>

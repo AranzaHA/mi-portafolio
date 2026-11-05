@@ -1,10 +1,9 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
+import '@fontsource-variable/plus-jakarta-sans'
+import '@fontsource/playball'
 import './index.css'
 import App from './App.tsx'
-
-const savedTheme = localStorage.getItem('portfolio-theme') || 'light'
-document.documentElement.setAttribute('data-theme', savedTheme)
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
