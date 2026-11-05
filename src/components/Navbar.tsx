@@ -1,8 +1,10 @@
 import { useState } from 'react'
 import LanguageToggle from './LanguageToggle'
+import { useI18n } from '../i18n/LanguageContext'
 
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false)
+  const { t } = useI18n()
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-base-100/80 backdrop-blur-md border-b border-base-300">
@@ -12,11 +14,11 @@ const Navbar = () => {
         </a>
 
         <ul className="hidden md:flex items-center gap-6 text-sm font-medium">
-          <li><a href="#about" className="hover:text-primary transition-colors">Sobre mí</a></li>
-          <li><a href="#skills" className="hover:text-primary transition-colors">Habilidades</a></li>
-          <li><a href="#experience" className="hover:text-primary transition-colors">Experiencia</a></li>
-          <li><a href="#projects" className="hover:text-primary transition-colors">Proyectos</a></li>
-          <li><a href="#contact" className="hover:text-primary transition-colors">Contacto</a></li>
+          <li><a href="#about" className="hover:text-primary transition-colors">{t.nav.about}</a></li>
+          <li><a href="#skills" className="hover:text-primary transition-colors">{t.nav.skills}</a></li>
+          <li><a href="#experience" className="hover:text-primary transition-colors">{t.nav.experience}</a></li>
+          <li><a href="#projects" className="hover:text-primary transition-colors">{t.nav.projects}</a></li>
+          <li><a href="#contact" className="hover:text-primary transition-colors">{t.nav.contact}</a></li>
         </ul>
 
         <div className="flex items-center gap-2">
@@ -24,7 +26,7 @@ const Navbar = () => {
           <button
             className="btn btn-ghost btn-circle md:hidden"
             onClick={() => setMobileOpen(!mobileOpen)}
-            aria-label="Menu"
+            aria-label={t.nav.menu}
           >
             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               {mobileOpen ? (
@@ -40,11 +42,11 @@ const Navbar = () => {
       {mobileOpen && (
         <div className="md:hidden bg-base-100 border-t border-base-300 px-6 pb-4">
           <ul className="flex flex-col gap-3 pt-3 text-sm font-medium">
-            <li><a href="#about" onClick={() => setMobileOpen(false)}>Sobre mí</a></li>
-            <li><a href="#skills" onClick={() => setMobileOpen(false)}>Habilidades</a></li>
-            <li><a href="#experience" onClick={() => setMobileOpen(false)}>Experiencia</a></li>
-            <li><a href="#projects" onClick={() => setMobileOpen(false)}>Proyectos</a></li>
-            <li><a href="#contact" onClick={() => setMobileOpen(false)}>Contacto</a></li>
+            <li><a href="#about" onClick={() => setMobileOpen(false)}>{t.nav.about}</a></li>
+            <li><a href="#skills" onClick={() => setMobileOpen(false)}>{t.nav.skills}</a></li>
+            <li><a href="#experience" onClick={() => setMobileOpen(false)}>{t.nav.experience}</a></li>
+            <li><a href="#projects" onClick={() => setMobileOpen(false)}>{t.nav.projects}</a></li>
+            <li><a href="#contact" onClick={() => setMobileOpen(false)}>{t.nav.contact}</a></li>
           </ul>
         </div>
       )}

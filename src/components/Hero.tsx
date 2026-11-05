@@ -1,6 +1,7 @@
 import AeroShards from './AeroShards'
 import { useBreakpoint, type Breakpoint } from '../hooks/useBreakpoint'
 import Reveal from './Reveal'
+import { useI18n } from '../i18n/LanguageContext'
 
 interface AeroShardsRange {
   count: number
@@ -22,6 +23,7 @@ const AERO_SHARDS_BY_BREAKPOINT: Record<Breakpoint, AeroShardsRange> = {
 const Hero = () => {
   const breakpoint = useBreakpoint()
   const shards = AERO_SHARDS_BY_BREAKPOINT[breakpoint]
+  const { t } = useI18n()
 
   return (
     <section className="h-[calc(100vh-4rem)] flex items-center relative overflow-hidden bg-base-100">
@@ -47,7 +49,7 @@ const Hero = () => {
               className="font-script text-primary leading-none"
               style={{ fontSize: 'clamp(3rem, 1.944rem + 4.507vw, 6rem)' }}
             >
-              Hola!
+              {t.hero.greeting}
             </span>
           </Reveal>
           <Reveal onLoad delay={150}>
@@ -55,7 +57,7 @@ const Hero = () => {
               className="font-medium text-base-content/70 leading-tight"
               style={{ fontSize: 'clamp(1.125rem, 0.905rem + 0.939vw, 1.75rem)', marginTop: '0.35em' }}
             >
-              Yo soy
+              {t.hero.intro}
             </p>
           </Reveal>
           <Reveal onLoad delay={300}>
@@ -71,23 +73,23 @@ const Hero = () => {
               className="font-medium leading-tight"
               style={{ fontSize: 'clamp(1rem, 0.736rem + 1.127vw, 1.75rem)', marginTop: '2.5rem' }}
             >
-              Desarrolladora <span className="text-primary">Full-Stack</span>
+              {t.hero.role} <span className="text-primary">{t.hero.roleAccent}</span>
             </p>
           </Reveal>
 
           <Reveal onLoad delay={600}>
             <div className="flex flex-wrap justify-center gap-4 pointer-events-auto" style={{ marginTop: '3rem' }}>
-            <a
-              href="/Aranza_Herrera_Arellano_CV.pdf"
-              className="btn btn-primary"
-            >
-              Descargar CV
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                <path fillRule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clipRule="evenodd" />
-              </svg>
-            </a>
+              <a
+                href={t.common.cvFile}
+                className="btn btn-primary"
+              >
+                {t.hero.downloadCv}
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                  <path fillRule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clipRule="evenodd" />
+                </svg>
+              </a>
               <a href="#contact" className="btn btn-outline btn-primary">
-                Contáctame
+                {t.hero.contactMe}
               </a>
             </div>
           </Reveal>

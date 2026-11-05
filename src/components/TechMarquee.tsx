@@ -1,10 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
 import MarqueeImport from 'react-fast-marquee'
 
-// Interop ESM/CJS: en algunos casos de Vite el default llega como { default: Marquee }
 const Marquee =
-    (MarqueeImport as unknown as { default?: typeof MarqueeImport }).default ??
-    MarqueeImport
+  (MarqueeImport as unknown as { default?: typeof MarqueeImport }).default ??
+  MarqueeImport
 import {
   useFloating,
   autoUpdate,
@@ -35,6 +34,7 @@ import {
   SiPostgresql,
   SiMongodb,
 } from 'react-icons/si'
+import { useI18n } from '../i18n/LanguageContext'
 
 export interface TechItem {
   name: string
@@ -70,12 +70,6 @@ const ROW2: TechItem[] = [
   { name: 'Highcharts', short: 'HC', color: '#8085E9', years: 4 },
 ]
 
-const getYearsText = (years: number | '<1') => {
-  if (years === '<1') return 'Menos de 1 año de experiencia'
-  if (years === 1) return '1 año de experiencia'
-  return `${years} años de experiencia`
-}
-
 const ChipWithTooltip = ({
   item,
   pausedByTouch,
@@ -88,6 +82,7 @@ const ChipWithTooltip = ({
   reduceMotion: boolean
 }) => {
   const Icon = item.icon
+  const { t } = useI18n()
   const [open, setOpen] = useState(false)
   const arrowRef = useRef<SVGSVGElement>(null)
   const id = item.name
@@ -97,12 +92,7 @@ const ChipWithTooltip = ({
     onOpenChange: setOpen,
     placement: 'top',
     whileElementsMounted: autoUpdate,
-    middleware: [
-      offset(10),
-      flip(),
-      shift({ padding: 8 }),
-      arrow({ element: arrowRef }),
-    ],
+    middleware: [offset(10), flip(), shift({ padding: 8 }), arrow({ element: arrowRef })],
   })
 
   const hover = useHover(context, {
@@ -117,7 +107,7 @@ const ChipWithTooltip = ({
   useEffect(() => {
     if (pausedByTouch && !open) return
     if (pausedByTouch) setOpen(true)
-  }, [pausedByTouch])
+  }, [pausedByTouch, open])
 
   const handleTouchStart = (e: React.TouchEvent) => {
     e.preventDefault()
@@ -125,19 +115,20 @@ const ChipWithTooltip = ({
     setOpen(true)
   }
 
+  const getYearsText = (years: number | '<1') => {
+    if (years === '<1') return t.techMarquee.yearsLessThanOne
+    if (years === 1) return t.techMarquee.yearsOne
+    return t.techMarquee.yearsMany(years)
+  }
+
   return (
     <>
       <div
         ref={refs.setReference}
         className="mx-2 sm:mx-3 group relative flex items-center justify-center w-13 h-13 sm:w-16 sm:h-16 rounded-full border transition-transform duration-300 ease-out hover:scale-[1.12]"
-        style={{
-          backgroundColor: '#131A26',
-          borderColor: 'rgba(0,255,255,0.3)',
-        }}
+        style={{ backgroundColor: '#131A26', borderColor: 'rgba(0,255,255,0.3)' }}
         aria-label={item.name}
-        {...getReferenceProps({
-          onTouchStart: handleTouchStart,
-        })}
+        {...getReferenceProps({ onTouchStart: handleTouchStart })}
       >
         {Icon ? (
           <Icon className="text-xl sm:text-2xl" style={{ color: item.color }} />
@@ -192,6 +183,7 @@ const ChipWithTooltip = ({
 }
 
 const TechMarquee = () => {
+  const { t } = useI18n()
   const [reduceMotion, setReduceMotion] = useState(false)
   const [openId, setOpenId] = useState<string | null>(null)
 
@@ -208,69 +200,52 @@ const TechMarquee = () => {
     if (typeof window === 'undefined') return
     const close = (e: TouchEvent) => {
       const target = e.target as HTMLElement
-      if (!target.closest('[aria-label]')) {
-        setOpenId(null)
-      }
+      if (!target.closest('[aria-label]')) setOpenId(null)
     }
     window.addEventListener('touchstart', close)
     return () => window.removeEventListener('touchstart', close)
   }, [])
 
+  const cvBlock = (
+    <div className="flex flex-col items-center text-center gap-4 mt-6">
+      <p className="text-base sm:text-lg text-base-content/80">{t.skills.cvPrompt}</p>
+      <a href={t.common.cvFile} className="btn btn-primary">
+        {t.skills.downloadCv}
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+          <path
+            fillRule="evenodd"
+            d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
+            clipRule="evenodd"
+          />
+        </svg>
+      </a>
+    </div>
+  )
+
+  const chip = (item: TechItem) => (
+    <ChipWithTooltip
+      key={item.name}
+      item={item}
+      pausedByTouch={openId === item.name}
+      onTouchOpen={(id) => setOpenId(id)}
+      reduceMotion={reduceMotion}
+    />
+  )
+
   if (reduceMotion) {
     return (
       <div className="space-y-2 py-2">
-        <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
-          {ROW1.map((item) => (
-            <ChipWithTooltip
-              key={item.name}
-              item={item}
-              pausedByTouch={openId === item.name}
-              onTouchOpen={(id) => setOpenId(id)}
-              reduceMotion
-            />
-          ))}
-        </div>
-        <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
-          {ROW2.map((item) => (
-            <ChipWithTooltip
-              key={item.name}
-              item={item}
-              pausedByTouch={openId === item.name}
-              onTouchOpen={(id) => setOpenId(id)}
-              reduceMotion
-            />
-          ))}
-        </div>
-
-        <div className="flex flex-col items-center text-center gap-4 mt-6">
-          <p className="text-base sm:text-lg text-base-content/80">
-            ¿Quieres conocer más sobre mis habilidades? Descarga mi CV
-          </p>
-          <a href="/Aranza_Herrera_Arellano-CV.pdf" className="btn btn-primary">
-            Descargar CV
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-              <path fillRule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clipRule="evenodd" />
-            </svg>
-          </a>
-        </div>
-        <style>{`
-          @keyframes tech-marquee-tooltip-in {
-            from { opacity: 0; transform: scale(0.95); }
-            to { opacity: 1; transform: scale(1); }
-          }
-        `}</style>
+        <div className="flex flex-wrap justify-center gap-2 sm:gap-3">{ROW1.map(chip)}</div>
+        <div className="flex flex-wrap justify-center gap-2 sm:gap-3">{ROW2.map(chip)}</div>
+        {cvBlock}
+        <style>{`@keyframes tech-marquee-tooltip-in { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }`}</style>
       </div>
     )
   }
 
   return (
     <div className="space-y-2 py-2">
-      <style>{`
-        @keyframes tech-marquee-tooltip-in {
-          from { opacity: 0; transform: scale(0.95); }
-          to { opacity: 1; transform: scale(1); }
-        }
-      `}</style>
+      <style>{`@keyframes tech-marquee-tooltip-in { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }`}</style>
       <Marquee
         direction="left"
         speed={28}
@@ -282,15 +257,7 @@ const TechMarquee = () => {
         style={{ paddingBlock: 12, overflowY: 'hidden' }}
         play={openId === null || !ROW1.some((r) => r.name === openId)}
       >
-        {ROW1.map((item) => (
-          <ChipWithTooltip
-            key={item.name}
-            item={item}
-            pausedByTouch={openId === item.name}
-            onTouchOpen={(id) => setOpenId(id)}
-            reduceMotion={false}
-          />
-        ))}
+        {ROW1.map(chip)}
       </Marquee>
       <Marquee
         direction="right"
@@ -303,28 +270,9 @@ const TechMarquee = () => {
         style={{ paddingBlock: 12, overflowY: 'hidden' }}
         play={openId === null || !ROW2.some((r) => r.name === openId)}
       >
-        {ROW2.map((item) => (
-          <ChipWithTooltip
-            key={item.name}
-            item={item}
-            pausedByTouch={openId === item.name}
-            onTouchOpen={(id) => setOpenId(id)}
-            reduceMotion={false}
-          />
-        ))}
+        {ROW2.map(chip)}
       </Marquee>
-
-      <div className="flex flex-col items-center text-center gap-4 mt-6">
-        <p className="text-base sm:text-lg text-base-content/80">
-          ¿Quieres conocer más sobre mis habilidades? Descarga mi CV
-        </p>
-        <a href="/Aranza_Herrera_Arellano_CV.pdf" className="btn btn-primary">
-          Descargar CV
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-            <path fillRule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clipRule="evenodd" />
-          </svg>
-        </a>
-      </div>
+      {cvBlock}
     </div>
   )
 }
