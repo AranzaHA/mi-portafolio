@@ -1,7 +1,9 @@
-import AeroShards from './AeroShards'
+import { lazy, Suspense } from 'react'
 import { useBreakpoint, type Breakpoint } from '../hooks/useBreakpoint'
 import Reveal from './Reveal'
 import { useI18n } from '../i18n/LanguageContext'
+
+const AeroShards = lazy(() => import('./AeroShards'))
 
 interface AeroShardsRange {
   count: number
@@ -28,18 +30,20 @@ const Hero = () => {
   return (
     <section className="h-[calc(100vh-4rem)] flex items-center relative overflow-hidden bg-base-100">
       <div className="absolute inset-0">
-        <AeroShards
-          key={breakpoint}
-          shardColor="#22d3ee"
-          accentColor="#3b82f6"
-          backgroundColor="transparent"
-          markers="none"
-          count={shards.count}
-          shardSize={shards.shardSize}
-          spread={shards.spread}
-          dpr={shards.dpr}
-          placement={shards.placement}
-        />
+        <Suspense fallback={null}>
+          <AeroShards
+            key={breakpoint}
+            shardColor="#22d3ee"
+            accentColor="#3b82f6"
+            backgroundColor="transparent"
+            markers="none"
+            count={shards.count}
+            shardSize={shards.shardSize}
+            spread={shards.spread}
+            dpr={shards.dpr}
+            placement={shards.placement}
+          />
+        </Suspense>
       </div>
       <div className="absolute inset-0 bg-base-100/40 lg:bg-transparent pointer-events-none" />
       <div className="max-w-7xl mx-auto px-6 w-full relative z-10">

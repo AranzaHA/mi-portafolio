@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { FaChevronLeft, FaChevronRight, FaArrowRight } from 'react-icons/fa'
-import webDev from '../assets/project-backgrounds/ngIf.png'
-import dashboards from '../assets/project-backgrounds/processEcology.png'
-import cvMaker from '../assets/project-backgrounds/luminaCV.png'
+import webDev from '../assets/project-backgrounds/ngIf.webp'
+import dashboards from '../assets/project-backgrounds/processEcology.webp'
+import cvMaker from '../assets/project-backgrounds/luminaCV.webp'
 import Reveal from './Reveal'
 import { useI18n } from '../i18n/LanguageContext'
 
@@ -14,6 +14,8 @@ interface ProjectStatic {
   title: string
   tech: string[]
   image: string
+  width: number
+  height: number
   link: string
 }
 
@@ -24,6 +26,8 @@ const projects: ProjectStatic[] = [
     title: 'Methane Innovation',
     tech: ['Angular', '.NET (C#)'],
     image: webDev,
+    width: 1999,
+    height: 1296,
     link: 'https://www.methaneinnovation.ca/',
   },
   {
@@ -32,6 +36,8 @@ const projects: ProjectStatic[] = [
     title: 'Process Ecology',
     tech: ['React', 'Java'],
     image: dashboards,
+    width: 1807,
+    height: 1293,
     link: 'https://processecology.com/',
   },
   {
@@ -40,6 +46,8 @@ const projects: ProjectStatic[] = [
     title: 'LuminaCV',
     tech: ['Next.js', 'TypeScript', 'Supabase', 'Tailwind CSS'],
     image: cvMaker,
+    width: 1553,
+    height: 948,
     link: 'https://luminacv-maker.vercel.app/',
   },
 ]
@@ -154,6 +162,10 @@ const Projects = () => {
                         <img
                           src={project.image}
                           alt={project.title}
+                          width={project.width}
+                          height={project.height}
+                          loading="lazy"
+                          decoding="async"
                           className="absolute inset-0 h-full w-full object-cover object-top md:rounded-[14px]"
                         />
                         <span

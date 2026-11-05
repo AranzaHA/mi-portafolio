@@ -1,4 +1,4 @@
-import myPhoto2 from '../assets/My_foto2.png'
+import myPhoto2 from '../assets/My_foto2.webp'
 import Reveal from './Reveal'
 import { useI18n } from '../i18n/LanguageContext'
 
@@ -39,6 +39,10 @@ const About = () => {
           <img
             src={myPhoto2}
             alt={t.about.photoAlt}
+            width={992}
+            height={1066}
+            loading="lazy"
+            decoding="async"
             className="w-full max-w-xs sm:max-w-sm lg:max-w-md h-auto rounded-3xl object-cover shadow-xl"
           />
         </Reveal>
