@@ -14,13 +14,15 @@ function App() {
   return (
     <>
       <Navbar />
-      <Hero />
-      <Ticker />
-      <About />
-      <Skills />
-      <Experience />
-      <Projects />
-      <Contact />
+      <main>
+        <Hero />
+        <Ticker />
+        <About />
+        <Skills />
+        <Experience />
+        <Projects />
+        <Contact />
+      </main>
       <footer className="footer footer-center p-4 bg-base-200 text-base-content border-t border-base-300">
         <div>
           <p>{t.footer.rights}</p>

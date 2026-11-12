@@ -1,4 +1,4 @@
-import { lazy, Suspense } from 'react'
+﻿import { lazy, Suspense } from 'react'
 import { useBreakpoint, type Breakpoint } from '../hooks/useBreakpoint'
 import Reveal from './Reveal'
 import { useI18n } from '../i18n/LanguageContext'
@@ -29,7 +29,7 @@ const Hero = () => {
 
   return (
     <section className="h-[calc(100vh-4rem)] flex items-center relative overflow-hidden bg-base-100">
-      <div className="absolute inset-0">
+      <div className="absolute inset-0" aria-hidden="true">
         <Suspense fallback={null}>
           <AeroShards
             key={breakpoint}
@@ -45,31 +45,29 @@ const Hero = () => {
           />
         </Suspense>
       </div>
-      <div className="absolute inset-0 bg-base-100/40 lg:bg-transparent pointer-events-none" />
+      <div className="absolute inset-0 bg-base-100/40 lg:bg-transparent pointer-events-none" aria-hidden="true" />
       <div className="max-w-7xl mx-auto px-6 w-full relative z-10">
         <div className="flex flex-col items-center text-center pointer-events-none">
-          <Reveal as="span" onLoad delay={0}>
-            <span
-              className="font-script text-primary leading-none"
-              style={{ fontSize: 'clamp(3rem, 1.944rem + 4.507vw, 6rem)' }}
-            >
-              {t.hero.greeting}
-            </span>
-          </Reveal>
-          <Reveal onLoad delay={150}>
-            <p
-              className="font-medium text-base-content/70 leading-tight"
-              style={{ fontSize: 'clamp(1.125rem, 0.905rem + 0.939vw, 1.75rem)', marginTop: '0.35em' }}
-            >
-              {t.hero.intro}
-            </p>
-          </Reveal>
-          <Reveal onLoad delay={300}>
-            <h1
-              className="font-extrabold uppercase text-base-content leading-[1.05] break-words max-w-full"
-              style={{ fontSize: 'clamp(2rem, 0.768rem + 5.258vw, 5.5rem)', letterSpacing: '0.04em', marginTop: '0.1em' }}
-            >
-              Aranza Herrera
+          <Reveal onLoad delay={0}>
+            <h1 className="flex flex-col items-center m-0">
+              <span
+                className="font-script text-primary leading-none"
+                style={{ fontSize: 'clamp(3rem, 1.944rem + 4.507vw, 6rem)' }}
+              >
+                {t.hero.greeting}
+              </span>
+              <span
+                className="font-medium text-base-content/70 leading-tight"
+                style={{ fontSize: 'clamp(1.125rem, 0.905rem + 0.939vw, 1.75rem)', marginTop: '0.35em' }}
+              >
+                {t.hero.intro}
+              </span>
+              <span
+                className="font-extrabold uppercase text-base-content leading-[1.05] break-words max-w-full"
+                style={{ fontSize: 'clamp(2rem, 0.768rem + 5.258vw, 5.5rem)', letterSpacing: '0.04em', marginTop: '0.1em' }}
+              >
+                Aranza Herrera
+              </span>
             </h1>
           </Reveal>
           <Reveal onLoad delay={450}>
@@ -83,13 +81,9 @@ const Hero = () => {
 
           <Reveal onLoad delay={600}>
             <div className="flex flex-wrap justify-center gap-4 pointer-events-auto" style={{ marginTop: '3rem' }}>
-              <a
-                href={t.common.cvFile}
-                download
-                className="btn btn-primary"
-              >
+              <a href={t.common.cvFile} download className="btn btn-primary">
                 {t.hero.downloadCv}
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                   <path fillRule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clipRule="evenodd" />
                 </svg>
               </a>
@@ -123,7 +117,7 @@ const Hero = () => {
               </div>
             </div>
           </div>*/}
-      <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-base-100 to-transparent" />
+      <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-base-100 to-transparent" aria-hidden="true" />
     </section>
   )
 }

@@ -24,14 +24,14 @@ const items: ExperienceStatic[] = [
 const Experience = () => {
   const { t } = useI18n()
   return (
-    <section id="experience" className="py-40 px-6 bg-base-100">
+    <section id="experience" aria-labelledby="experience-title" className="py-40 px-6 bg-base-100">
       <div className="max-w-6xl mx-auto">
         <Reveal className="text-center mb-14" delay={0}>
-          <h2 className="text-sm font-semibold tracking-widest text-primary uppercase mb-2">
+          <p className="text-sm font-semibold tracking-widest text-primary uppercase mb-2">
             {t.experience.eyebrow}
-          </h2>
-          <h3 className="text-3xl sm:text-4xl font-bold">{t.experience.title}</h3>
-          <div className="w-16 h-1 bg-primary mx-auto mt-4 rounded-full" />
+          </p>
+          <h2 id="experience-title" className="text-3xl sm:text-4xl font-bold">{t.experience.title}</h2>
+          <div className="w-16 h-1 bg-primary mx-auto mt-4 rounded-full" aria-hidden="true" />
         </Reveal>
 
         <ol className="relative space-y-8">
@@ -72,9 +72,9 @@ const Experience = () => {
                   >
                     <div className="flex flex-wrap items-start justify-between gap-2">
                       <div>
-                        <h4 className="text-lg sm:text-xl font-bold" style={{ color: '#F1F5F9' }}>
+                        <h3 className="text-lg sm:text-xl font-bold" style={{ color: '#F1F5F9' }}>
                           {tr.title}
-                        </h4>
+                        </h3>
                         <p className="mt-1">
                           <span className="text-sm" style={{ color: '#22D3EE' }}>
                             {t.experience.at} {tr.org}

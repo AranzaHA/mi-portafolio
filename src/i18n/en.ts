@@ -4,6 +4,7 @@ export const en: Dictionary = {
   common: {
     pageTitle: 'Aranza Herrera | Portfolio',
     cvFile: '/Aranza_Herrera_Arellano_CV_EN.pdf',
+    navAriaLabel: 'Main navigation',
     switchLanguageLabel: 'Switch language to Spanish',
   },
   nav: {
@@ -40,7 +41,7 @@ export const en: Dictionary = {
       'Before writing code, I take time to think about the architecture, and when something breaks, I debug systematically rather than through trial and error.',
     ],
     cta: 'Learn more about me',
-    photoAlt: 'Aranza Herrera',
+    photoAlt: 'Aranza Herrera, full-stack developer',
   },
   skills: {
     eyebrow: 'My Skills',
@@ -91,19 +92,23 @@ export const en: Dictionary = {
     title: 'Some of my recent work',
     viewProject: 'View project',
     ariaCarousel: 'Projects',
+    ariaRoleDescription: 'carousel',
     ariaPrev: 'Previous project',
     ariaNext: 'Next project',
     ariaGoTo: (n: number) => `Go to project ${n}`,
     items: {
       methane: {
+        imageAlt: 'Screenshot of the Methane Innovation home page',
         description:
           'Web platform for a clean technology innovation consortium, featuring data visualization and interactive diagrams to monitor methane emission reductions.',
       },
       processEcology: {
+        imageAlt: 'Screenshot of the Process Ecology home page',
         description:
           'Corporate website for Process Ecology Inc., a Canadian company focused on process simulation software for environmental impact.',
       },
       lumina: {
+        imageAlt: 'Screenshot of the LuminaCV home page',
         description: 'Web tool for creating and downloading professional resumes easily.',
       },
     },

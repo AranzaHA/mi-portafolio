@@ -5,11 +5,11 @@ import { useI18n } from '../i18n/LanguageContext'
 const About = () => {
   const { t } = useI18n()
   return (
-    <section id="about" className="py-40 px-6 bg-base-100">
+    <section id="about" aria-labelledby="about-title" className="py-40 px-6 bg-base-100">
       <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
         <Reveal className="space-y-6" delay={0}>
-          <span className="badge badge-primary badge-outline">{t.about.badge}</span>
-          <h2 className="text-3xl sm:text-4xl font-bold leading-tight">
+          <p className="badge badge-primary badge-outline">{t.about.badge}</p>
+          <h2 id="about-title" className="text-3xl sm:text-4xl font-bold leading-tight">
             {t.about.titlePrefix}{' '}
             <span className="text-primary">{t.about.titleAccent}</span>
           </h2>
@@ -29,7 +29,7 @@ const About = () => {
             className="btn btn-primary gap-2"
           >
             {t.about.cta}
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
             </svg>
           </a>

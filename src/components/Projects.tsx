@@ -111,21 +111,21 @@ const Projects = () => {
   }
 
   return (
-    <section id="projects" className="py-40 px-6 bg-base-200">
+    <section id="projects" aria-labelledby="projects-title" className="py-40 px-6 bg-base-200">
       <div className="max-w-6xl mx-auto">
         <Reveal className="text-center mb-14" delay={0}>
-          <h2 className="text-sm font-semibold tracking-widest text-primary uppercase mb-2">
+          <p className="text-sm font-semibold tracking-widest text-primary uppercase mb-2">
             {t.projects.eyebrow}
-          </h2>
-          <h3 className="text-3xl sm:text-4xl font-bold">{t.projects.title}</h3>
-          <div className="w-16 h-1 bg-primary mx-auto mt-4 rounded-full" />
+          </p>
+          <h2 id="projects-title" className="text-3xl sm:text-4xl font-bold">{t.projects.title}</h2>
+          <div className="w-16 h-1 bg-primary mx-auto mt-4 rounded-full" aria-hidden="true" />
         </Reveal>
 
         <Reveal delay={150}>
           <div
             ref={regionRef}
             role="region"
-            aria-roledescription="carousel"
+            aria-roledescription={t.projects.ariaRoleDescription}
             aria-label={t.projects.ariaCarousel}
             tabIndex={0}
             className="mx-auto max-w-[960px] outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-[20px]"
@@ -161,7 +161,7 @@ const Projects = () => {
                       <div className="relative w-full aspect-[16/10] md:aspect-auto md:min-h-[320px]">
                         <img
                           src={project.image}
-                          alt={project.title}
+                          alt={tr.imageAlt}
                           width={project.width}
                           height={project.height}
                           loading="lazy"
@@ -181,9 +181,9 @@ const Projects = () => {
                       </div>
                       <div className="flex flex-col gap-4 p-5 sm:p-6 md:p-7">
                         <div>
-                          <h4 className="text-xl sm:text-2xl font-bold" style={{ color: '#F1F5F9' }}>
+                          <h3 className="text-xl sm:text-2xl font-bold" style={{ color: '#F1F5F9' }}>
                             {project.title}
-                          </h4>
+                          </h3>
                           <p className="mt-2 text-sm leading-relaxed" style={{ color: '#94A3B8' }}>
                             {tr.description}
                           </p>
@@ -212,7 +212,7 @@ const Projects = () => {
                               }}
                             >
                               {t.projects.viewProject}
-                              <FaArrowRight className="h-4 w-4" />
+                              <FaArrowRight className="h-4 w-4" aria-hidden="true" />
                             </a>
                           </div>
                         )}
@@ -235,7 +235,7 @@ const Projects = () => {
                   color: '#F1F5F9',
                 }}
               >
-                <FaChevronLeft />
+                <FaChevronLeft aria-hidden="true" />
               </button>
               <div className="flex items-center gap-2">
                 {projects.map((_, index) => (
@@ -268,7 +268,7 @@ const Projects = () => {
                   color: '#F1F5F9',
                 }}
               >
-                <FaChevronRight />
+                <FaChevronRight aria-hidden="true" />
               </button>
             </div>
           </div>

@@ -4,6 +4,7 @@ export const es = {
   common: {
     pageTitle: 'Aranza Herrera | Portafolio',
     cvFile: '/Aranza_Herrera_Arellano_CV.pdf',
+    navAriaLabel: 'Navegación principal',
     switchLanguageLabel: 'Cambiar idioma a inglés',
   },
   nav: {
@@ -40,7 +41,7 @@ export const es = {
       'Antes de escribir código me detengo a pensar la arquitectura, y cuando algo falla depuro de forma sistemática, sin ir a prueba y error.',
     ],
     cta: 'Conoce más sobre mí',
-    photoAlt: 'Aranza Herrera',
+    photoAlt: 'Aranza Herrera, desarrolladora full-stack',
   },
   skills: {
     eyebrow: 'Mis Habilidades',
@@ -72,7 +73,7 @@ export const es = {
         description: 'Beca profesional en el área de sistemas del Congreso del Estado de Morelos.',
       },
       processEcology: {
-        range: 'Enero 2022 – Junio 2026',
+        range: 'Enero 2022 – Julio 2026',
         title: 'Desarrolladora Frontend y Full-Stack',
         org: 'Process Ecology Inc.',
         description:
@@ -91,19 +92,23 @@ export const es = {
     title: 'Algunos de mis trabajos recientes',
     viewProject: 'Ver proyecto',
     ariaCarousel: 'Proyectos',
+    ariaRoleDescription: 'carrusel',
     ariaPrev: 'Proyecto anterior',
     ariaNext: 'Siguiente proyecto',
     ariaGoTo: (n: number) => `Ir al proyecto ${n}`,
     items: {
       methane: {
+        imageAlt: 'Captura de la página de inicio de Methane Innovation',
         description:
           'Plataforma web para un consorcio de innovación en tecnologías limpias, con visualización de datos y diagramas interactivos para monitoreo de reducción de emisiones de metano.',
       },
       processEcology: {
+        imageAlt: 'Captura de la página de inicio de Process Ecology',
         description:
           'Página representativa de Process Ecology Inc. Empresa canadiense en el rubro de desarrollo de software de simulación de procesos contaminantes.',
       },
       lumina: {
+        imageAlt: 'Captura de la página de inicio de LuminaCV',
         description: 'Herramienta web para crear y descargar currículums profesionales de forma sencilla.',
       },
     },
