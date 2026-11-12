@@ -3,7 +3,7 @@ import type { Dictionary } from './es'
 export const en: Dictionary = {
   common: {
     pageTitle: 'Aranza Herrera | Portfolio',
-    cvFile: '/Aranza_Herrera_Arellano_CV.pdf',
+    cvFile: '/Aranza_Herrera_Arellano_CV_EN.pdf',
     switchLanguageLabel: 'Switch language to Spanish',
   },
   nav: {

@@ -85,6 +85,7 @@ const Hero = () => {
             <div className="flex flex-wrap justify-center gap-4 pointer-events-auto" style={{ marginTop: '3rem' }}>
               <a
                 href={t.common.cvFile}
+                download
                 className="btn btn-primary"
               >
                 {t.hero.downloadCv}

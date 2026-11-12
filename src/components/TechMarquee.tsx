@@ -209,7 +209,7 @@ const TechMarquee = () => {
   const cvBlock = (
     <div className="flex flex-col items-center text-center gap-4 mt-6">
       <p className="text-base sm:text-lg text-base-content/80">{t.skills.cvPrompt}</p>
-      <a href={t.common.cvFile} className="btn btn-primary">
+      <a href={t.common.cvFile} download className="btn btn-primary">
         {t.skills.downloadCv}
         <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
           <path

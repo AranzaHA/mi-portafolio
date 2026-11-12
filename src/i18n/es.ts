@@ -72,7 +72,7 @@ export const es = {
         description: 'Beca profesional en el área de sistemas del Congreso del Estado de Morelos.',
       },
       processEcology: {
-        range: 'Enero 2022 – Julio 2026',
+        range: 'Enero 2022 – Junio 2026',
         title: 'Desarrolladora Frontend y Full-Stack',
         org: 'Process Ecology Inc.',
         description:
