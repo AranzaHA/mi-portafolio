@@ -1,15 +1,98 @@
 @import "tailwindcss";
 @plugin "daisyui" {
-  themes: light --default, dim;
+  themes: false;
+}
+@plugin "daisyui/theme" {
+  name: "portfoliodark";
+  default: true;
+  prefersdark: false;
+  color-scheme: dark;
+
+  --color-base-100: #0a0e17;
+  --color-base-200: #131a26;
+  --color-base-300: #131a26;
+  --color-base-content: #f1f5f9;
+  --color-primary: #22d3ee;
+  --color-primary-content: #0a0e17;
+  --color-secondary: #3b82f6;
+  --color-secondary-content: #f1f5f9;
+  --color-accent: #22d3ee;
+  --color-accent-content: #0a0e17;
+  --color-neutral: #131a26;
+  --color-neutral-content: #f1f5f9;
+  --color-info: #3b82f6;
+  --color-info-content: #f1f5f9;
+  --color-success: #22d3ee;
+  --color-success-content: #0a0e17;
+  --color-warning: #f59e0b;
+  --color-warning-content: #0a0e17;
+  --color-error: #f87171;
+  --color-error-content: #0a0e17;
+
+  --radius-selector: 0.5rem;
+  --radius-field: 0.5rem;
+  --radius-box: 1rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+  --border: 1px;
+  --depth: 0;
+  --noise: 0;
+}
+
+@theme {
+  --font-sans: 'Plus Jakarta Sans Variable', system-ui, sans-serif;
+  --font-script: 'Playball', cursive;
+}
+
+:root {
+  --color-bg: #0a0e17;
+  --color-surface: #131a26;
+  --color-accent: #22d3ee;
+  --color-accent-2: #3b82f6;
+  --color-text: #f1f5f9;
+  --color-text-muted: #94a3b8;
+  --color-border: rgba(148, 163, 184, 0.15);
 }
 
 html {
   scroll-behavior: smooth;
+  color-scheme: dark;
+  background-color: var(--color-bg);
 }
 
 body {
   min-height: 100vh;
   width: 100%;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+}
+
+:root {
+  --reveal-distance: clamp(28px, 6vh, 56px);
+  --reveal-in: 1200ms;
+  --reveal-out: 600ms;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(calc(var(--reveal-distance) * -1));
+  transition: opacity var(--reveal-out) ease, transform var(--reveal-out) ease;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+  transition: opacity var(--reveal-in) cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0ms),
+    transform var(--reveal-in) cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0ms);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }
 
 @keyframes ticker {

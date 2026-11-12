@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://www.aranza-herrera-arellano.com/sitemap.xml
