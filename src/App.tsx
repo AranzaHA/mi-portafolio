@@ -9,27 +9,27 @@ import Contact from './components/Contact'
 import { useI18n } from './i18n/LanguageContext'
 
 function App() {
-  const { t } = useI18n()
+    const { t } = useI18n()
 
-  return (
-    <>
-      <Navbar />
-      <main>
-        <Hero />
-        <Ticker />
-        <About />
-        <Skills />
-        <Experience />
-        <Projects />
-        <Contact />
-      </main>
-      <footer className="footer footer-center p-4 bg-base-200 text-base-content border-t border-base-300">
-        <div>
-          <p>{t.footer.rights}</p>
-        </div>
-      </footer>
-    </>
-  )
+    return (
+        <>
+            <Navbar />
+            <main>
+                <Hero />
+                <Ticker />
+                <About />
+                <Skills />
+                <Experience />
+                <Projects />
+                <Contact />
+            </main>
+            <footer className="footer footer-center p-4 bg-base-200 text-base-content border-t border-base-300">
+                <div>
+                    <p>{t.footer.rights}</p>
+                </div>
+            </footer>
+        </>
+    )
 }
 
 export default App
